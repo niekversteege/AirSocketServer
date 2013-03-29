@@ -18,6 +18,8 @@ public class Server {
     
     private boolean isAppelTaartLekker = true;
     
+    private boolean jenkinsDiff = true;
+    
     /**
      * Public method. Moet commentaar bij jong.
      */
