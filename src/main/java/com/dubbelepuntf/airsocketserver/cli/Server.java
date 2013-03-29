@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.apache.log4j.Logger;
+
 /**
  * Stuff enzo
  * 
@@ -11,39 +13,36 @@ import java.io.InputStreamReader;
  *
  */
 public class Server { 
+	
+	private final Logger log = Logger.getLogger(this.getClass());
     
     private boolean isAppelTaartLekker = true;
     
-    
+    /**
+     * Public method. Moet commentaar bij jong.
+     */
     public void startCLI() {
         
         while(isAppelTaartLekker){
             
-            print("Ready for a command...");
+            log.info("Enter a command:");
             
             String input = getInput();
             
             Command command = Command.find(input);
             
-            printCommandMessage(command);
             if (!excuteCommand(command))
             {
             	break;
             }
-                        
-            print(" ");
         }
-    }
-    
-    private void printCommandMessage(Command command) {
-        
-        print(command.getMessage());
-        
     }
     
     private boolean excuteCommand(Command command){
         
-    	boolean retVal = false;
+    	boolean retVal = true;
+    	
+    	log.info(command.getMessage());
     	
         switch(command){
                 
@@ -67,27 +66,20 @@ public class Server {
 		return retVal;
     }
     
-    private void print(final String message) {
-        
-       System.out.println(message);
-        
-    }
-    
     private String getInput() {
 
         String input = "";
         BufferedReader inputBuffer = new BufferedReader(new InputStreamReader(System.in));
         
         try {
-            
+            log.info("$ ");
                 input = inputBuffer.readLine();
                 
         }
         
         catch (IOException e) {
             
-                // TODO: hackerdehax
-                e.printStackTrace();
+               log.error(e.getMessage(), e);
                 
         }
 
