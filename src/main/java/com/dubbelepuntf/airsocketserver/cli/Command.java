@@ -1,4 +1,4 @@
-package com.dubbelepuntf.airsocketserver;
+package com.dubbelepuntf.airsocketserver.cli;
 
 /**
  * Commands enzo
