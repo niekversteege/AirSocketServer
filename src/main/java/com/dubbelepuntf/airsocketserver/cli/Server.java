@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class Server { 
 	
-	private final Logger log = Logger.getLogger(this.getClass());
+    private final Logger log = Logger.getLogger(this.getClass());
     
     private boolean isAppelTaartLekker = true;
     
@@ -31,14 +31,14 @@ public class Server {
             
             Command command = Command.find(input);
             
-            if (!excuteCommand(command))
+            if (!executeCommand(command))
             {
             	break;
             }
         }
     }
     
-    private boolean excuteCommand(Command command){
+    private boolean executeCommand(Command command){
         
     	boolean retVal = true;
     	
@@ -47,20 +47,20 @@ public class Server {
         switch(command){
                 
                 case HELP:
-                    // excute stuff
+                    // execute stuff
                 break;
                 
                 case STOP:
-                    // excute stuff
+                    // execute stuff
                 	retVal= false;
                 break;
                 
                 case COFFEE:
-                    // excute stuff
+                    // execute stuff
                 break;
                 
                 case NONE:
-                    // excute stuff
+                    // execute stuff
                 break;
         }
 		return retVal;
