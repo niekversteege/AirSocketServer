@@ -1,4 +1,4 @@
-package com.dubbelepuntf.airsocketserver;
+package com.dubbelepuntf.airsocketserver.cli;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,15 +12,10 @@ import java.io.InputStreamReader;
  */
 public class Server { 
     
-    private static boolean isAppelTaartLekker = true;
+    private boolean isAppelTaartLekker = true;
     
-    public static void main( String[] args ) {
-        
-        startCLI();
-                
-    }
     
-    private static void startCLI() {
+    public void startCLI() {
         
         while(isAppelTaartLekker){
             
@@ -31,20 +26,25 @@ public class Server {
             Command command = Command.find(input);
             
             printCommandMessage(command);
-            excuteCommand(command);
+            if (!excuteCommand(command))
+            {
+            	break;
+            }
                         
             print(" ");
         }
     }
     
-    private static void printCommandMessage(Command command) {
+    private void printCommandMessage(Command command) {
         
         print(command.getMessage());
         
     }
     
-    private static void excuteCommand(Command command){
+    private boolean excuteCommand(Command command){
         
+    	boolean retVal = false;
+    	
         switch(command){
                 
                 case HELP:
@@ -53,6 +53,7 @@ public class Server {
                 
                 case STOP:
                     // excute stuff
+                	retVal= false;
                 break;
                 
                 case COFFEE:
@@ -63,15 +64,16 @@ public class Server {
                     // excute stuff
                 break;
         }
+		return retVal;
     }
     
-    private static void print(final String message) {
+    private void print(final String message) {
         
        System.out.println(message);
         
     }
     
-    private static String getInput() {
+    private String getInput() {
 
         String input = "";
         BufferedReader inputBuffer = new BufferedReader(new InputStreamReader(System.in));
