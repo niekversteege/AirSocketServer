@@ -8,9 +8,12 @@ public class AirSocketMain {
      * @param args
      */
     public static void main(String[] args) {
-
-        CommandLineInterface cli = new CommandLineInterface();
-        cli.start();
+        
+        Server server               = new Server();
+        CommandLineInterface cli    = new CommandLineInterface(server);
+        
+        new Thread(server).start();
+        new Thread(cli).start();
 
     }
 }
