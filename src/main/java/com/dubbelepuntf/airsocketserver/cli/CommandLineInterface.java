@@ -1,28 +1,34 @@
 package com.dubbelepuntf.airsocketserver.cli;
 
-import com.dubbelepuntf.airsocketserver.Server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import lombok.extern.log4j.Log4j;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import com.dubbelepuntf.airsocketserver.Server;
 
 /**
  * Command Line Interface
  */
+@Log4j
 public class CommandLineInterface implements Runnable {
     
-    private Options options             = new Options();
-    private CommandLineParser parser    = new BasicParser();
+    private Options options;
+    private CommandLineParser parser;
     private Server server;
     
     public CommandLineInterface(Server serverToCommand) {
-        
+    	
+    	options             = new Options();
+    	parser    = new BasicParser();    
         server = serverToCommand;
         
         Option help         = new Option( "help", "print this message" );
@@ -39,11 +45,16 @@ public class CommandLineInterface implements Runnable {
         System.out.println(args.length);
         try {
             CommandLine commandLine = parser.parse(options, args);
-            System.out.println(commandLine.hasOption("help"));
+            
+            if (commandLine.hasOption("help"))
+            {
+            	log.debug("found help message");
+            }
+            
             server.executeCommand(commandLine);
         }
         catch( ParseException exp ) {
-            System.err.println( "Parsing exception: " + exp.getMessage() );
+           log.error( "Parsing exception: " + exp.getMessage() , exp);
         } 
     }
     
@@ -56,6 +67,7 @@ public class CommandLineInterface implements Runnable {
                  parse(inputBuffer.readLine());
                  
              } catch (IOException e) {
+            	 log.error(e.getMessage(), e);
                  Thread.currentThread().interrupt();
                  return;
              }
