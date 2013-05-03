@@ -36,10 +36,10 @@ public class CommandLineInterface implements Runnable {
     private void parse(String input) {
         
         String[] args = input.split(" ");
-        
+        System.out.println(args.length);
         try {
             CommandLine commandLine = parser.parse(options, args);
-            System.out.println(commandLine.getOptions().length);
+            System.out.println(commandLine.hasOption("help"));
             server.executeCommand(commandLine);
         }
         catch( ParseException exp ) {
