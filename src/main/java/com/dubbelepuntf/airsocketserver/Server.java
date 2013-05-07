@@ -2,8 +2,6 @@ package com.dubbelepuntf.airsocketserver;
 
 import lombok.extern.log4j.Log4j;
 
-import org.apache.commons.cli.CommandLine;
-
 /**
  *  The server
  */
@@ -14,9 +12,10 @@ public class Server implements Runnable {
     	
     }
     
-    public void executeCommand(CommandLine commandLine) {
+    public void executeCommand() {
         
-        log.info("Executing command: " + commandLine);
+        log.info("kanker");
+        
     }
     
     public synchronized void run() {
