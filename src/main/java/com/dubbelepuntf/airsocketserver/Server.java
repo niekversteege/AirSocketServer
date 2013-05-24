@@ -1,37 +1,37 @@
 package com.dubbelepuntf.airsocketserver;
 
+import lombok.extern.log4j.Log4j;
+
 import org.apache.commons.cli.CommandLine;
 
 /**
  *  The server
  */
+@Log4j
 public class Server implements Runnable {
     
     public Server () {
-        
-        
-        
+    	
     }
     
     public void executeCommand(CommandLine commandLine) {
         
-        System.out.println("Server executing command: " + commandLine);
-        
+        log.info("Executing command: " + commandLine);
     }
     
     public synchronized void run() {
         
-        System.out.println("Server booting up...");
+       log.info("Booting up...");
         
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 
-                System.out.println("Server heartbeat!");
+                log.info("Heartbeat!");
                 wait(30000);
                 
             }
         } catch (InterruptedException ex) {
-            System.out.println("Server was interrupted! " + ex);
+            log.error("interrupted: " + ex.getMessage(), ex);
         }
     }
 }
