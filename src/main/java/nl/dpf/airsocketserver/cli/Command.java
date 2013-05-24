@@ -1,4 +1,4 @@
-package com.dubbelepuntf.airsocketserver.cli;
+package nl.dpf.airsocketserver.cli;
 
 /**
  *  
@@ -12,22 +12,20 @@ public enum Command {
     private String name;
     private int numberOfArgs;
     
-    Command(String _name, int _numberOfArgs) {
+    Command(final String name, final int numberOfArgs) {
         
-        this.name = _name;
-        this.numberOfArgs = _numberOfArgs;
+        this.name = name;
+        this.numberOfArgs = numberOfArgs;
         
     }
     
     public String getName() {
         
         return name;
-        
     }
     
     public int getNumberOfArgs() {
         
-        return numberOfArgs;
-        
+        return numberOfArgs;       
     }
 }

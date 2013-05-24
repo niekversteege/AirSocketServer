@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dubbelepuntf.airsocketserver.cli;
+package nl.dpf.airsocketserver.cli;
 
 import java.util.List;
 import lombok.Getter;
@@ -11,15 +11,18 @@ import lombok.Setter;
 /**
  *
  */
-public class CommandDto {
+public class CommandLine {
     
-    @Getter @Setter
+    @Getter
     private Command command;
     
     @Getter @Setter
-    private List args;
+    private List<String> args;
     
-    public void CommandDto() {
-        
-    }
+    public CommandLine(final Command command)
+	{
+		this.command = command;
+	}
+
+	
 }
