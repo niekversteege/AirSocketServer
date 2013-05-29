@@ -4,25 +4,30 @@
  */
 package nl.dpf.airsocketserver.cli;
 
-import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
-public class CommandLine {
-    
+public class CommandLine
+{
     @Getter
     private Command command;
-    
-    @Getter @Setter
-    private List<String> args;
-    
-    public CommandLine(final Command command)
-	{
-		this.command = command;
-	}
 
-	
+    @Getter
+    private List<String> args;
+
+    public CommandLine(final Command command)
+    {
+        args = new ArrayList<>();
+        this.command = command;
+    }
+
+    public void addArgs(final List<String> newArgs)
+    {
+        args.addAll(newArgs);
+    }
 }
