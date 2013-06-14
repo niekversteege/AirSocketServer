@@ -15,15 +15,16 @@ public class CommandLineInterface {
 
     private static final String SPLIT_CHAR = " ";
     private boolean stop;
-    private ConnectionHandler connectionHandler;
+    private  Thread connectionHandlerThread;
 
     public CommandLineInterface() {
         stop = false;
-        connectionHandler = new ConnectionHandler();
-        connectionHandler.run();
+        connectionHandlerThread = new Thread(new ConnectionHandler());
+        connectionHandlerThread.start();
     }
 
     public void run() {
+
         while (!stop) {
             String input = getInput();
             CommandLine command = CommandLineBuilder.getCommandLine(input, SPLIT_CHAR);
@@ -31,24 +32,30 @@ public class CommandLineInterface {
             if (command == null) {
                 log.info("Invalid input and/or command. Try again.");
             } else {
-                invokeCommand(command);
+                if (invokeCommand(command)){
+                    break;
+                }
             }
         }
     }
 
-    private void invokeCommand(final CommandLine commandLine) {
+    private boolean invokeCommand(final CommandLine commandLine) {
         switch (commandLine.getCommand()) {
             case HELP:
                 /* Print usage / help message */
                 break;
             case STOP:
                 /* Close everything and exit program */
-                break;
+                connectionHandlerThread.interrupt();
+                log.info("Stopping server.");
+                return true;
             default:
                 /* print error message */
                 break;
 
         }
+
+        return false;
     }
 
     private String getInput() {
