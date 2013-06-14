@@ -12,6 +12,11 @@ public class CommandLineBuilder {
     public static CommandLine getCommandLine(final String input, final String delimiter) {
         CommandLine line = null;
 
+        if (input == null || delimiter == null)
+        {
+            return line;
+        }
+
         if (!input.isEmpty() && !delimiter.isEmpty()) {
             List<String> fields = Arrays.asList(input.split(delimiter));
 
