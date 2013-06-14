@@ -28,12 +28,11 @@ public class ConnectionHandler extends Observable implements Runnable {
 
     public synchronized void run() {
 
-        ConnectionHandler.log.info("Starting listensocket.");
-        ConnectionHandler.log.info("Accepting new connections on port " + port + ".");
+        ConnectionHandler.log.info("Starting listensocket on port " + port + ".");
 
-        while (running) {
+        /* TODO: socket.listen, wait for packets! */
 
-        }
+
 
     }
 }
