@@ -1,6 +1,5 @@
 package nl.dpf.airsocketserver.cli;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,15 +12,16 @@ public class CommandLineBuilder {
     public static CommandLine getCommandLine(final String input, final String delimiter) {
         CommandLine line = null;
 
-        List<String> fields = Arrays.asList(input.split(delimiter));
+        if (!input.isEmpty() && !delimiter.isEmpty()) {
+            List<String> fields = Arrays.asList(input.split(delimiter));
 
-        for (Command c : Command.values()) {
-            if (nameIsCorrect(c, fields.get(FIELD_NAME)) && nrOfArgsCorrect(c, fields)) {
+            for (Command c : Command.values()) {
+                if (nameIsCorrect(c, fields.get(FIELD_NAME)) && nrOfArgsCorrect(c, fields)) {
 
-                line = new CommandLine(c);
+                    line = new CommandLine(c);
+                }
             }
         }
-
         return line;
     }
 
@@ -29,8 +29,7 @@ public class CommandLineBuilder {
         return command.getName().equals(name);
     }
 
-    private static boolean nrOfArgsCorrect(final Command command, final List<String> fields)
-    {
-         return command.getNumberOfArgs() == (fields.size() -1);
+    private static boolean nrOfArgsCorrect(final Command command, final List<String> fields) {
+        return command.getNumberOfArgs() == (fields.size() - 1);
     }
 }

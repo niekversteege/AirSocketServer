@@ -15,12 +15,14 @@ public class CommandLineInterface {
 
     private static final String SPLIT_CHAR = " ";
     private boolean stop;
+    /* FIXME: this should not be here. Not even close =/ */
     private  ConnectionHandler connectionHandler;
 
     public CommandLineInterface() {
         stop = false;
         connectionHandler = new ConnectionHandler();
         Thread connThread = new Thread(connectionHandler);
+
     }
 
     public void run() {
