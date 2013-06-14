@@ -1,5 +1,8 @@
 package nl.dpf.airsocketserver.server;
 
+import lombok.extern.log4j.Log4j;
+import nl.dpf.airsocketserver.connections.ConnectionHandler;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,14 +14,41 @@ import java.util.Observer;
  * Time: 3:12 PM
  * To change this template use File | Settings | File Templates.
  */
+@Log4j
 public class ServerController implements Observer {
 
     private List<Client> clientList;
+    private ConnectionHandler connectionHandler;
+    Thread connThread;
+    private int nrOfClients;
 
+    public ServerController() {
+
+        log.info("Starting server.");
+        connectionHandler = new ConnectionHandler();
+        connThread = new Thread(connectionHandler);
+        initConnectionHandler();
+        nrOfClients = 0;
+    }
+
+    private void initConnectionHandler() {
+        connectionHandler.addObserver(this);
+        connThread.start();
+
+    }
+
+    public synchronized boolean stop()
+    {
+        connectionHandler.stop();
+
+        return true;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
         /* TODO: receive updates from ConnectionHandler and pass it to the ClientFactory */
         /* TODO: add new client to list */
+        log.debug("update called.");
+        log.debug("Connected clients: " + (++nrOfClients));
     }
 }
