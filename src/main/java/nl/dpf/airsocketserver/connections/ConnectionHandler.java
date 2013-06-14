@@ -31,8 +31,5 @@ public class ConnectionHandler extends Observable implements Runnable {
         ConnectionHandler.log.info("Starting listensocket on port " + port + ".");
 
         /* TODO: socket.listen, wait for packets! */
-
-
-
     }
 }

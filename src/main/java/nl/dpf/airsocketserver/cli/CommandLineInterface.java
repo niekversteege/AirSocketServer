@@ -15,12 +15,12 @@ public class CommandLineInterface {
 
     private static final String SPLIT_CHAR = " ";
     private boolean stop;
-    private  Thread connectionHandlerThread;
+    private  ConnectionHandler connectionHandler;
 
     public CommandLineInterface() {
         stop = false;
-        connectionHandlerThread = new Thread(new ConnectionHandler());
-        connectionHandlerThread.start();
+        connectionHandler = new ConnectionHandler();
+        Thread connThread = new Thread(connectionHandler);
     }
 
     public void run() {
@@ -46,7 +46,6 @@ public class CommandLineInterface {
                 break;
             case STOP:
                 /* Close everything and exit program */
-                connectionHandlerThread.interrupt();
                 log.info("Stopping server.");
                 return true;
             default:
