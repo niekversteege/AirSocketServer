@@ -6,8 +6,9 @@ package nl.dpf.airsocketserver.cli;
 public enum Command
 {
     HELP("help", 0),
-    OPEN("open", 1),
-    TIME("time", 0);
+    STOP("stop", 0),
+    LIST("list", 0),
+    KICK("kick", 1);
 
     private String name;
     private int numberOfArgs;

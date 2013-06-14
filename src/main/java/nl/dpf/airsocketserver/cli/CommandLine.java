@@ -12,22 +12,29 @@ import java.util.List;
 /**
  *
  */
-public class CommandLine
-{
+public class CommandLine {
+    private boolean argsSet = false;
+
     @Getter
     private Command command;
 
     @Getter
     private List<String> args;
 
-    public CommandLine(final Command command)
-    {
+    public CommandLine(final Command command) {
         args = new ArrayList<>();
         this.command = command;
     }
 
-    public void addArgs(final List<String> newArgs)
-    {
-        args.addAll(newArgs);
+    public CommandLine(final Command command, final List<String> rawFields) {
+        this(command);
+        addArgs(rawFields.subList(1, rawFields.size()));
+    }
+
+    public void addArgs(final List<String> newArgs) {
+        if (!argsSet) {
+            args.addAll(newArgs);
+            argsSet = true;
+        }
     }
 }
