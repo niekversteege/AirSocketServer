@@ -22,7 +22,7 @@ public class ConnectionHandler extends Observable implements Runnable {
 
     public ConnectionHandler() {
         this(DEFAULT_PORT);
-        ConnectionHandler.log.info("No port given. Using default.");
+        log.info("No port given. Using default.");
     }
 
     public ConnectionHandler(final int port) {
@@ -40,10 +40,14 @@ public class ConnectionHandler extends Observable implements Runnable {
         }
     }
 
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
     public synchronized void run() {
 
-        ConnectionHandler.log.info("Starting listensocket on port " + port + ".");
-        
+        log.info("Starting listensocket on port " + port + ".");
+
         while (running) {
             try {
                 Socket newSocket = serverSocket.accept();
@@ -52,14 +56,19 @@ public class ConnectionHandler extends Observable implements Runnable {
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
             }
+            finally {
+                stop();
+            }
         }
     }
 
     public synchronized void stop() {
 
+        running = false;
+
+        log.debug("Stop called. Closing socket.");
         try {
-            log.debug("closing socket");
-            running = false;
+
             serverSocket.close();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
