@@ -55,8 +55,6 @@ public class ConnectionHandler extends Observable implements Runnable {
                 notifyObservers(newSocket);
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
-            } finally {
-                stop();
             }
         }
     }

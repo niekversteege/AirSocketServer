@@ -16,7 +16,7 @@ public class CommandLineInterface {
 
     private static final String SPLIT_CHAR = " ";
 
-    BufferedReader inputBuffer;
+    private final BufferedReader inputBuffer;
     private boolean stop;
 
     ServerController controller;
@@ -46,6 +46,7 @@ public class CommandLineInterface {
     }
 
     private boolean invokeCommand(final CommandLine commandLine) {
+
         switch (commandLine.getCommand()) {
             case HELP:
                 /* Print usage / help message */
@@ -69,9 +70,11 @@ public class CommandLineInterface {
     }
 
     private void stop() {
+
         log.info("Stopping server.");
         stop = true;
         controller.stop();
+
         try {
             inputBuffer.close();
         } catch (IOException e) {
@@ -80,6 +83,7 @@ public class CommandLineInterface {
     }
 
     private String getInput() {
+
         String input = null;
 
         try {

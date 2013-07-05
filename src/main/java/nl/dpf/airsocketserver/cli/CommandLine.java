@@ -7,6 +7,7 @@ package nl.dpf.airsocketserver.cli;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,10 +17,9 @@ public class CommandLine {
     private boolean argsSet = false;
 
     @Getter
-    private Command command;
+    private final Command command;
 
-    @Getter
-    private List<String> args;
+    private final List<String> args;
 
     public CommandLine(final Command command) {
         args = new ArrayList<>();
