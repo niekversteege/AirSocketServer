@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j;
 import nl.dpf.airsocketserver.connections.ConnectionHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,14 +19,16 @@ import java.util.Observer;
 @Log4j
 public class ServerController implements Observer {
 
-    private List<Client> clientList;
+    private final List<Client> clientList;
     private ConnectionHandler connectionHandler;
-    Thread connThread;
+    private Thread connThread;
     private int nrOfClients;
 
     public ServerController() {
 
         log.info("Starting server.");
+
+        clientList = new ArrayList<>();
         connectionHandler = new ConnectionHandler();
         connThread = new Thread(connectionHandler);
         initConnectionHandler();
@@ -33,14 +36,15 @@ public class ServerController implements Observer {
     }
 
     private void initConnectionHandler() {
+
         connectionHandler.addObserver(this);
         connThread.start();
-
     }
 
-    public synchronized boolean stop()
-    {
+    public synchronized boolean stop() {
+
         boolean success = false;
+
         try {
             connectionHandler.getServerSocket().close();
             success = true;

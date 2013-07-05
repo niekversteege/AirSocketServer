@@ -3,8 +3,7 @@ package nl.dpf.airsocketserver.cli;
 /**
  *
  */
-public enum Command
-{
+public enum Command {
     HELP("help", 0),
     STOP("stop", 0),
     LIST("list", 0),
@@ -13,19 +12,16 @@ public enum Command
     private String name;
     private int numberOfArgs;
 
-    Command(final String name, final int numberOfArgs)
-    {
+    Command(final String name, final int numberOfArgs) {
         this.name = name;
         this.numberOfArgs = numberOfArgs;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public int getNumberOfArgs()
-    {
+    public int getNumberOfArgs() {
         return numberOfArgs;
     }
 }

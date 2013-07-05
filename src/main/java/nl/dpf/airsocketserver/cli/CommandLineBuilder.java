@@ -12,8 +12,7 @@ public class CommandLineBuilder {
     public static CommandLine getCommandLine(final String input, final String delimiter) {
         CommandLine line = null;
 
-        if (input == null || delimiter == null)
-        {
+        if (input == null || delimiter == null) {
             return line;
         }
 

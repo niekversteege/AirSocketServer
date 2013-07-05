@@ -11,6 +11,6 @@ import java.net.InetAddress;
  */
 public class Client {
 
-    private String name;
+    private String playerName;
     private InetAddress inetAddress;
 }

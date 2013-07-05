@@ -9,8 +9,7 @@ package nl.dpf.airsocketserver.server;
  */
 public class ClientFactory {
 
-    public static Client create()
-    {
+    public static Client create() {
         return null;
     }
 }

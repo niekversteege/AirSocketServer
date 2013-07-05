@@ -64,8 +64,7 @@ public class CommandLineInterface {
         return false;
     }
 
-    private void printHelp()
-    {
+    private void printHelp() {
 
     }
 
