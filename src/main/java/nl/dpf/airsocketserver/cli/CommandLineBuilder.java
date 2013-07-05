@@ -23,6 +23,7 @@ public class CommandLineBuilder {
                 if (nameIsCorrect(c, fields.get(FIELD_NAME)) && nrOfArgsCorrect(c, fields)) {
 
                     line = new CommandLine(c);
+                    line.addArgs(fields.subList(1, fields.size()));
                 }
             }
         }
