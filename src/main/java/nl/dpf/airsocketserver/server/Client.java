@@ -1,5 +1,7 @@
 package nl.dpf.airsocketserver.server;
 
+import sun.security.util.BigInt;
+
 import java.net.InetAddress;
 
 /**
@@ -11,6 +13,26 @@ import java.net.InetAddress;
  */
 public class Client {
 
-    private String playerName;
-    private InetAddress inetAddress;
+    private final String clientName;
+    private final InetAddress inetAddress;
+
+    public Client(final String clientName, final InetAddress inetAddress) {
+        this.clientName = clientName;
+        this.inetAddress = inetAddress;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void kick() {
+        /* TODO: Notify the client that it is going to be removed. */
+
+        stop();
+    }
+
+    public void stop() {
+
+        /* TODO: Stop the connections to the client */
+    }
 }

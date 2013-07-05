@@ -4,10 +4,7 @@ import lombok.extern.log4j.Log4j;
 import nl.dpf.airsocketserver.connections.ConnectionHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -60,5 +57,41 @@ public class ServerController implements Observer {
         /* TODO: receive updates from ConnectionHandler and pass it to the ClientFactory */
         /* TODO: add new client to list */
         log.debug("Connected clients: " + ++nrOfClients);
+    }
+
+    public final List<Client> getClientList() {
+        return Collections.unmodifiableList(clientList);
+    }
+
+    public boolean kickClient(final String clientName) {
+        Client toRemove = findAndRemoveClientByName(clientName);
+
+        if (toRemove != null) {
+            toRemove.kick();
+
+            return true;
+        } else {
+            log.warn("Tried to kick client that was not found.");
+        }
+
+        return false;
+    }
+
+    private Client findAndRemoveClientByName(final String clientName) {
+
+        Client c = null;
+
+        int i = 0;
+        for (i = 0; i < clientList.size(); i++) {
+            Client a = clientList.get(i);
+
+            if (a.getClientName().equals(clientName)) {
+
+                break;
+            }
+        }
+
+        c = clientList.remove(i);
+        return c;
     }
 }
