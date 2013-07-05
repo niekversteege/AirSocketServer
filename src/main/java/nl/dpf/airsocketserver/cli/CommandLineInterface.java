@@ -77,10 +77,14 @@ public class CommandLineInterface {
 
     private void printClients(List<Client> clientList) {
 
-        log.info("Connected clients:");
+        if (clientList.size() > 0) {
+            log.info("Connected clients:");
 
-        for (Client c : clientList) {
-            log.info("\t" + c.toString());
+            for (Client c : clientList) {
+                log.info("\t" + c.toString());
+            }
+        } else {
+            log.info("No clients connected.");
         }
     }
 

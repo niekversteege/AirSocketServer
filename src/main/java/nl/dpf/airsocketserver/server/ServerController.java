@@ -81,17 +81,22 @@ public class ServerController implements Observer {
 
         Client c = null;
 
-        int i = 0;
-        for (i = 0; i < clientList.size(); i++) {
-            Client a = clientList.get(i);
+        int nrClients = clientList.size();
 
-            if (a.getClientName().equals(clientName)) {
+        if (nrClients > 0) {
+            int i = 0;
+            for (i = 0; i < nrClients; i++) {
+                Client a = clientList.get(i);
 
-                break;
+                if (a.getClientName().equals(clientName)) {
+
+                    break;
+                }
             }
+
+            c = clientList.remove(i);
         }
 
-        c = clientList.remove(i);
         return c;
     }
 }
