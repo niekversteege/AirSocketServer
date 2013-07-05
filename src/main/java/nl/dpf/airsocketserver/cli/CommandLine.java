@@ -37,4 +37,8 @@ public class CommandLine {
             argsSet = true;
         }
     }
+
+    public List<String> getArgs() {
+        return Collections.unmodifiableList(args);
+    }
 }

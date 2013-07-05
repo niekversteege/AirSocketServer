@@ -2,11 +2,13 @@ package nl.dpf.airsocketserver.cli;
 
 import lombok.extern.log4j.Log4j;
 import nl.dpf.airsocketserver.connections.ConnectionHandler;
+import nl.dpf.airsocketserver.server.Client;
 import nl.dpf.airsocketserver.server.ServerController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Command Line Interface
@@ -56,6 +58,14 @@ public class CommandLineInterface {
                 /* Close everything and exit program */
                 stop();
                 return true;
+            case LIST:
+                printClients(controller.getClientList());
+                break;
+            case KICK:
+                /* We can assume that commandLine has the correct amount of args, since this checked on creation */
+                /* TODO: this construction is still terribly ugly */
+                String clientName = commandLine.getArgs().get(0);
+                controller.kickClient(clientName);
             default:
                 /* print error message */
                 break;
@@ -65,8 +75,22 @@ public class CommandLineInterface {
         return false;
     }
 
-    private void printHelp() {
+    private void printClients(List<Client> clientList) {
 
+        if (clientList.size() > 0) {
+            log.info("Connected clients:");
+
+            for (Client c : clientList) {
+                log.info("\t" + c.toString());
+            }
+        } else {
+            log.info("No clients connected.");
+        }
+    }
+
+    private void printHelp() {
+        /* TODO: print something helpful about the available commands. */
+        /* TODO: maybe do this dynamically? */
     }
 
     private void stop() {
