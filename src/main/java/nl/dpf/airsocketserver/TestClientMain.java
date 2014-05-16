@@ -17,5 +17,6 @@ public class TestClientMain {
         Socket socket = new Socket();
         InetSocketAddress socketAddress = new InetSocketAddress("localhost", 13337);
         socket.connect(socketAddress, 10);
+        socket.close();
     }
 }
